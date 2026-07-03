@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutrirod | Nutrição Esportiva & Performance</title>
+
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ICONS -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- FONTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'serif']
+          },
+          colors: {
+            brand: {
+              orange: '#ff8200',
+              orangeHover: '#e67300',
+              green: '#466f4a',
+              greenDark: '#233829',
+              greenDeep: '#15241a',
+              greenSoft: '#e8eee6',
+              gray: '#6c6d71',
+              graySoft: '#f0f0ee',
+              light: '#f8f5ef',
+              white: '#ffffff'
+            }
+          },
+          boxShadow: {
+            premium: '0 30px 90px rgba(21,36,26,.14)',
+            orangeGlow: '0 22px 60px rgba(255,130,0,.26)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #f8f5ef;
+      color: #233829;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(255, 130, 0, .24);
+      color: #15241a;
+    }
+
+    .logo-top {
+      width: 152px;
+      max-width: 44vw;
+      max-height: 82px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .section-title {
+      letter-spacing: -0.055em;
+      line-height: .95;
+    }
+
+    .hero-bg {
+      position: relative;
+      background:
+        radial-gradient(circle at 10% 12%, rgba(255,130,0,.16), transparent 32%),
+        radial-gradient(circle at 88% 18%, rgba(70,111,74,.13), transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(255,130,0,.08), transparent 40%),
+        linear-gradient(135deg, #ffffff 0%, #fbfaf6 48%, #eef3ec 100%);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: .42;
+      pointer-events: none;
+    }
+
+    .hero-grid-light {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(35,56,41,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35,56,41,.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: .55;
+      pointer-events: none;
+    }
+
+    .hero-light .portrait-frame {
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(35,56,41,.10);
+      box-shadow: 0 36px 90px rgba(21,36,26,.16);
+    }
+
+    .hero-light .portrait-frame::before {
+      border-color: rgba(255,130,0,.26);
+    }
+
+    .hero-proof {
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(35,56,41,.10);
+      box-shadow: 0 18px 55px rgba(21,36,26,.06);
+      backdrop-filter: blur(18px);
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .proof-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: rgba(255,130,0,.12);
+      color: #ff8200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .proof-item strong {
+      display: block;
+      color: #233829;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    .proof-item span {
+      display: block;
+      margin-top: 5px;
+      color: #6c6d71;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: .08;
+      pointer-events: none;
+    }
+
+    .hero-light .hero-noise {
+      background-image: radial-gradient(rgba(35,56,41,.18) 1px, transparent 1px);
+      opacity: .12;
+    }
+
+    .glow-orange {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      background: rgba(255,130,0,.22);
+      filter: blur(125px);
+      pointer-events: none;
+    }
+
+    .glow-green {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      background: rgba(70,111,74,.34);
+      filter: blur(125px);
+      pointer-events: none;
+    }
+
+    .btn-premium {
+      transition: all .35s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 60px rgba(255,130,0,.30);
+    }
+
+    .card-premium {
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(35,56,41,.09);
+      box-shadow: 0 24px 70px rgba(21,36,26,.08);
+      backdrop-filter: blur(18px);
+      transition: all .35s ease;
+    }
+
+    .card-premium:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,130,0,.42);
+      box-shadow: 0 28px 90px rgba(21,36,26,.12);
+    }
+
+    .dark-card {
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(20px);
+      transition: all .35s ease;
+    }
+
+    .dark-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,130,0,.48);
+      background: rgba(255,255,255,.07);
+    }
+
+    .portrait-frame {
+      position: relative;
+      border-radius: 34px;
+      padding: 10px;
+      background: linear-gradient(145deg, rgba(255,255,255,.20), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 45px 100px rgba(0,0,0,.30);
+    }
+
+    .portrait-frame::before {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border-radius: 42px;
+      border: 1px solid rgba(255,130,0,.26);
+      z-index: -1;
+    }
+
+    .portrait-img {
+      width: 100%;
+      min-height: 620px;
+      max-height: 760px;
+      object-fit: cover;
+      border-radius: 26px;
+      display: block;
+    }
+
+    .floating-badge {
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .whatsapp-float {
+      animation: pulse-orange 2.2s infinite;
+    }
+
+    @keyframes pulse-orange {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,130,0,.66); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 16px rgba(255,130,0,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,130,0,0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #mobile-menu {
+      transition: .3s ease-in-out;
+      transform-origin: top;
+    }
+
+    @media (max-width: 1024px) {
+      .portrait-img {
+        min-height: 520px;
+        max-height: 620px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-top { width: 128px; max-height: 72px; }
+      .section-title { letter-spacing: -0.045em; }
+      .portrait-img { min-height: 440px; max-height: 520px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- BOTÃO FLUTUANTE WHATSAPP -->
+  <a
+    href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20agendar%20minha%20consulta%20com%20o%20Nutrirod&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+    target="_blank"
+    class="whatsapp-float fixed bottom-6 right-6 w-16 h-16 bg-brand-orange text-white rounded-full flex items-center justify-center z-[999] transition-transform duration-300 hover:scale-110 shadow-2xl"
+    aria-label="Fale no WhatsApp"
+  >
+    <i data-lucide="message-circle" class="w-8 h-8"></i>
+  </a>
+
+  <!-- HEADER -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-white/88 backdrop-blur-xl shadow-[0_16px_45px_rgba(35,56,41,0.06)]">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 h-[104px] flex items-center justify-between">
+      <a href="#inicio" class="flex items-center" aria-label="Nutrirod - início">
+        <img src="logo.png" alt="Nutrirod Nutricionista" class="logo-top" />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-10">
+        <a href="#metodo" class="text-sm font-semibold tracking-wide text-brand-greenDark/70 hover:text-brand-orange transition">Método</a>
+        <a href="#especialidades" class="text-sm font-semibold tracking-wide text-brand-greenDark/70 hover:text-brand-orange transition">Atuação</a>
+        <a href="#como-funciona" class="text-sm font-semibold tracking-wide text-brand-greenDark/70 hover:text-brand-orange transition">Como funciona</a>
+        <a href="#sobre" class="text-sm font-semibold tracking-wide text-brand-greenDark/70 hover:text-brand-orange transition">O Nutri</a>
+        <a
+          href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20agendar%20minha%20consulta%20com%20o%20Nutrirod&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+          target="_blank"
+          class="btn-premium bg-brand-orange text-white px-7 py-3 rounded-full text-xs font-extrabold tracking-widest uppercase hover:bg-brand-orangeHover transition"
+        >
+          Agendar Consulta
+        </a>
+      </nav>
+
+      <button id="menu-toggle" class="lg:hidden text-brand-greenDark" aria-label="Abrir menu">
+        <i data-lucide="menu" class="w-7 h-7"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden absolute top-[104px] left-0 w-full bg-brand-greenDeep border-b border-white/10 flex-col p-8 gap-5 lg:hidden shadow-xl">
+      <a href="#metodo" class="mobile-link text-lg font-medium py-1 text-white/90">Método</a>
+      <a href="#especialidades" class="mobile-link text-lg font-medium py-1 text-white/90">Atuação</a>
+      <a href="#como-funciona" class="mobile-link text-lg font-medium py-1 text-white/90">Como funciona</a>
+      <a href="#sobre" class="mobile-link text-lg font-medium py-1 text-white/90">O Nutri</a>
+      <a
+        href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20agendar%20minha%20consulta%20com%20o%20Nutrirod&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+        target="_blank"
+        class="bg-brand-orange text-white py-4 rounded-xl text-center font-bold tracking-wider uppercase text-sm"
+      >
+        Agendar Consulta
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero-bg hero-light min-h-screen flex items-center pt-28 text-brand-greenDark">
+    <div class="hero-grid-light"></div>
+    <div class="hero-noise"></div>
+    <div class="glow-orange top-[-210px] left-[-170px]"></div>
+    <div class="glow-green bottom-[-260px] right-[-170px]"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-12 gap-14 items-center relative z-[2]">
+      <div class="lg:col-span-7 reveal">
+        <span class="inline-flex items-center gap-3 border border-brand-greenDark/10 bg-white/70 px-5 py-3 rounded-full text-xs sm:text-sm tracking-[0.22em] uppercase text-brand-orange font-extrabold backdrop-blur-xl mb-8 shadow-sm">
+          <i data-lucide="dumbbell" class="w-4 h-4"></i>
+          Nutrição Esportiva • Estética • Performance
+        </span>
+
+        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl section-title font-light max-w-4xl">
+          Construa seu melhor shape com <span class="italic text-brand-orange font-normal">estratégia, ciência e constância.</span>
+        </h1>
+
+        <p class="text-brand-gray text-lg sm:text-xl leading-relaxed max-w-2xl mt-8 font-light">
+          Nutrição estratégica para ganhar massa, definir e render mais — sem dieta impossível.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 mt-10">
+          <a
+            href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20agendar%20minha%20consulta%20com%20o%20Nutrirod&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+            target="_blank"
+            class="btn-premium bg-brand-orange text-white px-10 py-5 rounded-full font-extrabold text-center text-sm tracking-widest uppercase hover:bg-brand-orangeHover shadow-orangeGlow"
+          >
+            Agendar minha consulta
+          </a>
+        </div>
+
+        <div class="hero-proof max-w-2xl mt-14 rounded-[28px] p-5 sm:p-6">
+          <div class="grid sm:grid-cols-3 gap-5">
+            <div class="proof-item">
+              <div class="proof-icon">
+                <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+              </div>
+              <strong>Plano individual</strong>
+            </div>
+
+            <div class="proof-item">
+              <div class="proof-icon">
+                <i data-lucide="target" class="w-5 h-5"></i>
+              </div>
+              <strong>Foco no resultado</strong>
+            </div>
+
+            <div class="proof-item">
+              <div class="proof-icon">
+                <i data-lucide="messages-square" class="w-5 h-5"></i>
+              </div>
+              <strong>Online e presencial</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 reveal">
+        <div class="relative max-w-md mx-auto lg:ml-auto">
+          <div class="absolute -top-8 -right-5 sm:-right-10 bg-brand-orange text-white rounded-3xl px-6 py-5 shadow-orangeGlow z-10 floating-badge hidden sm:block">
+            <p class="text-xs uppercase tracking-widest font-extrabold opacity-80">Foco</p>
+            <p class="font-serif text-3xl italic leading-none">resultado real</p>
+          </div>
+
+          <div class="portrait-frame">
+            <img
+              src="img/rodrigo2.webp"
+              alt="Rodrigo Silva - Nutrirod"
+              class="portrait-img"
+              onerror="this.src='https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=1374&auto=format&fit=crop';"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACOMPANHAMENTO -->
+  <section id="acompanhamento" class="py-28 lg:py-32 bg-white border-b border-brand-graySoft overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto text-center mb-16 reveal">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brand-orange">Como funciona o acompanhamento</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-brand-greenDark mt-4 section-title">
+          Escolha o plano ideal para o seu momento.
+        </h2>
+        <p class="text-brand-gray text-lg mt-7 font-light leading-relaxed max-w-2xl mx-auto">
+          Cada acompanhamento é pensado para ajustar alimentação, rotina e estratégia conforme o seu objetivo: definição, hipertrofia, emagrecimento ou performance.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card-premium rounded-[32px] p-9 lg:p-10 reveal">
+          <div class="w-14 h-14 rounded-2xl bg-brand-orange/12 text-brand-orange flex items-center justify-center mb-8">
+            <i data-lucide="calendar-days" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-4xl font-normal text-brand-greenDark mb-5">Plano de 30 Dias</h3>
+          <p class="text-brand-gray font-light leading-relaxed mb-7">
+            Ideal para quem quer começar com direção, organizar a alimentação e sair do achismo com um plano claro para executar no dia a dia.
+          </p>
+          <ul class="space-y-4 text-sm text-brand-greenDark font-semibold">
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Consulta inicial com análise da rotina e objetivo</span>
+            </li>
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Plano alimentar personalizado</span>
+            </li>
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Direcionamento para os primeiros ajustes</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-premium rounded-[32px] p-9 lg:p-10 reveal relative overflow-hidden border-brand-orange/40">
+          <div class="absolute top-6 right-6 bg-brand-orange text-white text-[10px] font-extrabold tracking-widest uppercase px-4 py-2 rounded-full">
+            Mais escolhido
+          </div>
+          <div class="w-14 h-14 rounded-2xl bg-brand-orange/12 text-brand-orange flex items-center justify-center mb-8">
+            <i data-lucide="trending-up" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-4xl font-normal text-brand-greenDark mb-5">Plano de 3 meses</h3>
+          <p class="text-brand-gray font-light leading-relaxed mb-7">
+            Indicado para quem busca evolução consistente, com tempo suficiente para acompanhar respostas do corpo, ajustar a estratégia e melhorar constância.
+          </p>
+          <ul class="space-y-4 text-sm text-brand-greenDark font-semibold">
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Acompanhamento com ajustes durante o processo</span>
+            </li>
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Estratégia para emagrecimento, hipertrofia ou performance</span>
+            </li>
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Mais clareza para manter o resultado sem radicalismo</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-premium rounded-[32px] p-9 lg:p-10 reveal">
+          <div class="w-14 h-14 rounded-2xl bg-brand-orange/12 text-brand-orange flex items-center justify-center mb-8">
+            <i data-lucide="award" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-4xl font-normal text-brand-greenDark mb-5">Plano de 6 meses</h3>
+          <p class="text-brand-gray font-light leading-relaxed mb-7">
+            Para quem quer uma transformação mais completa, com acompanhamento prolongado, refinamento da estratégia e construção de hábitos sólidos.
+          </p>
+          <ul class="space-y-4 text-sm text-brand-greenDark font-semibold">
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Evolução acompanhada por mais tempo</span>
+            </li>
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Ajustes progressivos conforme fase e objetivo</span>
+            </li>
+            <li class="flex gap-3">
+              <i data-lucide="check" class="w-5 h-5 text-brand-orange shrink-0 mt-0.5"></i>
+              <span>Construção de resultado com consistência e manutenção</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center mt-14 reveal">
+        <a
+          href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20saber%20qual%20plano%20%C3%A9%20ideal%20para%20mim&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+          target="_blank"
+          class="btn-premium inline-flex items-center gap-3 bg-brand-orange text-white px-10 py-5 rounded-full font-extrabold text-sm tracking-widest uppercase hover:bg-brand-orangeHover shadow-orangeGlow"
+        >
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          Quero escolher meu plano
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section id="metodo" class="relative py-28 lg:py-32 bg-brand-light section-pattern overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-[2]">
+      <div class="max-w-3xl mb-16 lg:mb-20 reveal">
+        <span class="text-brand-orange uppercase tracking-[0.25em] text-sm font-extrabold">O problema</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light mt-6 section-title text-brand-greenDark">
+          O seu corpo não precisa de mais tentativa. Precisa de direção.
+        </h2>
+        <p class="text-brand-gray text-lg lg:text-xl mt-8 leading-relaxed font-light">
+          Copiar dieta, cortar carboidrato do nada e treinar no escuro cria frustração. O resultado vem quando alimentação, treino e rotina trabalham na mesma direção.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card-premium rounded-[28px] p-8 reveal">
+          <div class="w-13 h-13 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center mb-7 p-3">
+            <i data-lucide="trending-down" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-4 text-brand-greenDark">Efeito sanfona</h3>
+          <p class="text-brand-gray leading-relaxed text-sm font-light">Você perde peso por um tempo, mas volta ao início porque o plano não conversa com a sua vida real.</p>
+        </div>
+
+        <div class="card-premium rounded-[28px] p-8 reveal">
+          <div class="w-13 h-13 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center mb-7 p-3">
+            <i data-lucide="battery-warning" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-4 text-brand-greenDark">Pouca energia</h3>
+          <p class="text-brand-gray leading-relaxed text-sm font-light">O treino não rende, a recuperação fica ruim e o corpo não responde por falta de estratégia alimentar.</p>
+        </div>
+
+        <div class="card-premium rounded-[28px] p-8 reveal">
+          <div class="w-13 h-13 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center mb-7 p-3">
+            <i data-lucide="ban" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-4 text-brand-greenDark">Restrição demais</h3>
+          <p class="text-brand-gray leading-relaxed text-sm font-light">Dietas radicais até funcionam por alguns dias, mas quebram sua rotina, sua vida social e sua constância.</p>
+        </div>
+
+        <div class="card-premium rounded-[28px] p-8 reveal">
+          <div class="w-13 h-13 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center mb-7 p-3">
+            <i data-lucide="dumbbell" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-4 text-brand-greenDark">Shape travado</h3>
+          <p class="text-brand-gray leading-relaxed text-sm font-light">Você se esforça, mas não sabe se está comendo para perder gordura, ganhar massa ou sustentar performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METODO -->
+  <section class="relative py-28 lg:py-32 bg-brand-greenDeep text-white overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,130,0,.20),transparent_42%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(70,111,74,.35),transparent_45%)]"></div>
+    <div class="hero-grid opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-[2]">
+      <div class="text-center max-w-4xl mx-auto mb-20 reveal">
+        <span class="text-brand-orange uppercase tracking-[0.25em] text-sm font-extrabold">Método Nutrirod</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-7xl font-light mt-6 section-title">
+          Nutrição com estratégia para o seu objetivo.
+        </h2>
+        <p class="text-white/65 text-lg lg:text-xl mt-8 leading-relaxed font-light">
+          Um processo mais claro, mais elegante e mais sustentável: sem achismo, sem terrorismo nutricional e sem plano genérico.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="dark-card rounded-[32px] p-10 reveal">
+          <div class="w-16 h-16 rounded-2xl bg-brand-orange/15 flex items-center justify-center mb-8">
+            <i data-lucide="scan-search" class="w-8 h-8 text-brand-orange"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-5">Diagnóstico</h3>
+          <p class="text-white/60 leading-relaxed font-light">Análise da sua rotina, treinos, preferências, histórico e meta principal para encontrar o ponto exato de evolução.</p>
+        </div>
+
+        <div class="dark-card rounded-[32px] p-10 reveal">
+          <div class="w-16 h-16 rounded-2xl bg-brand-orange/15 flex items-center justify-center mb-8">
+            <i data-lucide="clipboard-check" class="w-8 h-8 text-brand-orange"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-5">Plano alimentar</h3>
+          <p class="text-white/60 leading-relaxed font-light">Estratégia nutricional personalizada para definição, hipertrofia ou performance, respeitando o que você consegue sustentar.</p>
+        </div>
+
+        <div class="dark-card rounded-[32px] p-10 reveal">
+          <div class="w-16 h-16 rounded-2xl bg-brand-orange/15 flex items-center justify-center mb-8">
+            <i data-lucide="activity" class="w-8 h-8 text-brand-orange"></i>
+          </div>
+          <h3 class="font-serif text-3xl font-normal mb-5">Ajustes inteligentes</h3>
+          <p class="text-white/60 leading-relaxed font-light">Acompanhamento para ajustar calorias, macros e rotina conforme seu corpo responde na prática.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section id="especialidades" class="py-28 lg:py-32 bg-white border-y border-brand-graySoft">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto text-center mb-20 reveal">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brand-orange">Foco de atendimento</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-brand-greenDark mt-4 section-title">Áreas de atuação</h2>
+        <p class="text-brand-gray mt-7 text-lg font-light leading-relaxed">Escolha uma rota clara para o seu objetivo principal e pare de misturar estratégias que se anulam.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="card-premium bg-brand-light p-10 rounded-[30px] text-center reveal">
+          <i data-lucide="target" class="w-11 h-11 text-brand-orange mx-auto mb-7"></i>
+          <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-4">Emagrecimento</h3>
+          <p class="text-brand-gray text-sm font-light leading-relaxed">Queima de gordura com preservação de massa magra, mais energia e uma dieta possível de manter.</p>
+        </div>
+
+        <div class="card-premium bg-brand-light p-10 rounded-[30px] text-center reveal">
+          <i data-lucide="zap" class="w-11 h-11 text-brand-orange mx-auto mb-7"></i>
+          <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-4">Hipertrofia</h3>
+          <p class="text-brand-gray text-sm font-light leading-relaxed">Direcionamento para ganhar massa, melhorar força e construir um físico mais preenchido e estético.</p>
+        </div>
+
+        <div class="card-premium bg-brand-light p-10 rounded-[30px] text-center reveal">
+          <i data-lucide="flame" class="w-11 h-11 text-brand-orange mx-auto mb-7"></i>
+          <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-4">Performance</h3>
+          <p class="text-brand-gray text-sm font-light leading-relaxed">Ajuste de nutrientes, horários e rotina alimentar para treinar melhor, recuperar melhor e evoluir mais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" class="py-28 lg:py-32 bg-brand-light section-pattern">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-14 items-start">
+        <div class="lg:col-span-5 reveal">
+          <span class="text-brand-orange uppercase tracking-[0.25em] text-sm font-extrabold">Processo</span>
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light mt-6 section-title text-brand-greenDark">Simples para começar. Estratégico para evoluir.</h2>
+          <p class="text-brand-gray text-lg mt-8 leading-relaxed font-light">Nada de plano solto. A consulta vira um mapa de ação com etapas claras para você saber exatamente o que fazer.</p>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5">
+          <div class="card-premium rounded-[28px] p-7 sm:p-8 flex gap-6 reveal">
+            <div class="shrink-0 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-black">1</div>
+            <div>
+              <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-2">Primeiro contato</h3>
+              <p class="text-brand-gray font-light leading-relaxed">Você chama no WhatsApp, informa seu objetivo e recebe as orientações iniciais para agendar.</p>
+            </div>
+          </div>
+
+          <div class="card-premium rounded-[28px] p-7 sm:p-8 flex gap-6 reveal">
+            <div class="shrink-0 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-black">2</div>
+            <div>
+              <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-2">Consulta e avaliação</h3>
+              <p class="text-brand-gray font-light leading-relaxed">Rotina, treino, alimentação, preferências e dificuldades são analisados para criar uma estratégia realista.</p>
+            </div>
+          </div>
+
+          <div class="card-premium rounded-[28px] p-7 sm:p-8 flex gap-6 reveal">
+            <div class="shrink-0 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-black">3</div>
+            <div>
+              <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-2">Plano personalizado</h3>
+              <p class="text-brand-gray font-light leading-relaxed">Você recebe um plano alimentar com direcionamento objetivo para emagrecimento, hipertrofia ou performance.</p>
+            </div>
+          </div>
+
+          <div class="card-premium rounded-[28px] p-7 sm:p-8 flex gap-6 reveal">
+            <div class="shrink-0 w-12 h-12 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-black">4</div>
+            <div>
+              <h3 class="font-serif text-3xl font-normal text-brand-greenDark mb-2">Evolução e ajustes</h3>
+              <p class="text-brand-gray font-light leading-relaxed">A estratégia é ajustada conforme sua resposta, mantendo constância, rendimento e resultado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="py-28 lg:py-32 bg-white border-t border-brand-graySoft overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto text-center mb-16 reveal">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brand-orange">Depoimentos</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-brand-greenDark mt-4 section-title">Alunos que já sentiram a diferença.</h2>
+        <p class="text-brand-gray text-lg mt-7 font-light leading-relaxed max-w-2xl mx-auto">
+          Relatos curtos de quem saiu do achismo e começou a seguir uma estratégia de verdade.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card-premium rounded-[30px] p-8 lg:p-9 reveal">
+          <div class="flex items-center gap-2 text-brand-orange mb-7" aria-label="Avaliação 5 estrelas">
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          </div>
+          <p class="text-brand-greenDark text-lg font-medium leading-relaxed mb-8">
+            “Finalmente consegui seguir uma dieta sem passar fome e sem abandonar minha rotina.”
+          </p>
+          <div class="flex items-center gap-4 pt-6 border-t border-brand-graySoft">
+            <div class="w-12 h-12 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center font-black">A1</div>
+            <div>
+              <strong class="block text-brand-greenDark">Aluno Nutrirod</strong>
+              <span class="text-sm text-brand-gray">Emagrecimento</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-premium rounded-[30px] p-8 lg:p-9 reveal">
+          <div class="flex items-center gap-2 text-brand-orange mb-7" aria-label="Avaliação 5 estrelas">
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          </div>
+          <p class="text-brand-greenDark text-lg font-medium leading-relaxed mb-8">
+            “Meu treino começou a render mais. A diferença foi ter um plano claro para executar.”
+          </p>
+          <div class="flex items-center gap-4 pt-6 border-t border-brand-graySoft">
+            <div class="w-12 h-12 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center font-black">A2</div>
+            <div>
+              <strong class="block text-brand-greenDark">Aluno Nutrirod</strong>
+              <span class="text-sm text-brand-gray">Performance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-premium rounded-[30px] p-8 lg:p-9 reveal">
+          <div class="flex items-center gap-2 text-brand-orange mb-7" aria-label="Avaliação 5 estrelas">
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          </div>
+          <p class="text-brand-greenDark text-lg font-medium leading-relaxed mb-8">
+            “Parei de copiar dieta pronta e comecei a evoluir com algo feito para mim.”
+          </p>
+          <div class="flex items-center gap-4 pt-6 border-t border-brand-graySoft">
+            <div class="w-12 h-12 rounded-2xl bg-brand-greenDark text-brand-orange flex items-center justify-center font-black">A3</div>
+            <div>
+              <strong class="block text-brand-greenDark">Aluno Nutrirod</strong>
+              <span class="text-sm text-brand-gray">Hipertrofia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="py-28 lg:py-32 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16 items-center">
+      <div class="lg:col-span-5 relative reveal">
+        <div class="absolute -inset-4 bg-brand-green rounded-[30px] -z-10"></div>
+        <div class="absolute -bottom-7 -right-7 w-32 h-32 bg-brand-orange rounded-[30px] -z-10 opacity-95"></div>
+        <img
+          src="img/rodrigo.webp"
+          alt="Rodrigo Silva - Nutrirod"
+          class="rounded-[24px] w-full aspect-[4/5] object-cover shadow-premium bg-brand-graySoft"
+          onerror="this.src='https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=1374&auto=format&fit=crop';"
+        />
+      </div>
+
+      <div class="lg:col-span-7 reveal">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brand-orange block mb-3">Resultados sem achismo</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light mb-8 text-brand-greenDark section-title">Rodrigo Silva</h2>
+
+        <div class="space-y-6 text-brand-gray text-base lg:text-lg font-light leading-relaxed">
+          <p>
+            Como <strong class="text-brand-greenDark font-semibold">Nutricionista Esportivo</strong>, o foco é gerar transformações corporais com estratégia, clareza e prática — sem fórmulas mágicas e sem terrorismo nutricional.
+          </p>
+          <p>
+            A proposta é construir um plano que se encaixe na sua vida, potencialize seus treinos e facilite a constância para resultados reais em definição, hipertrofia e performance.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-4 pt-6 text-sm text-brand-greenDark font-semibold">
+            <div class="flex items-center gap-3 bg-brand-light border border-brand-graySoft rounded-2xl p-4">
+              <i data-lucide="map-pin" class="text-brand-orange w-5 h-5"></i>
+              <span>Umarizal Office - Belém/PA</span>
+            </div>
+            <div class="flex items-center gap-3 bg-brand-light border border-brand-graySoft rounded-2xl p-4">
+              <i data-lucide="globe" class="text-brand-orange w-5 h-5"></i>
+              <span>Consultas presenciais e online</span>
+            </div>
+          </div>
+
+          <a
+            href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20agendar%20minha%20consulta%20com%20o%20Nutrirod&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+            target="_blank"
+            class="btn-premium inline-flex items-center gap-3 bg-brand-orange text-white px-9 py-5 rounded-full font-extrabold text-sm tracking-widest uppercase hover:bg-brand-orangeHover shadow-orangeGlow mt-4"
+          >
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-28 lg:py-32 bg-brand-light border-t border-brand-graySoft">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brand-orange">Dúvidas frequentes</span>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-brand-greenDark mt-4 section-title">Antes de agendar</h2>
+      </div>
+
+      <div class="space-y-5">
+        <details class="card-premium rounded-3xl p-7 group reveal">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-semibold text-brand-greenDark">
+            A consulta pode ser online?
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-orange transition group-open:rotate-180"></i>
+          </summary>
+          <p class="text-brand-gray mt-4 font-light leading-relaxed">Sim. O atendimento pode ser presencial ou online, com direcionamento personalizado conforme sua rotina e objetivo.</p>
+        </details>
+
+        <details class="card-premium rounded-3xl p-7 group reveal">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-semibold text-brand-greenDark">
+            Preciso cortar tudo para ter resultado?
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-orange transition group-open:rotate-180"></i>
+          </summary>
+          <p class="text-brand-gray mt-4 font-light leading-relaxed">Não. A ideia é criar uma estratégia sustentável, com alimentos e ajustes que façam sentido para você manter constância.</p>
+        </details>
+
+        <details class="card-premium rounded-3xl p-7 group reveal">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-semibold text-brand-greenDark">
+            O plano serve para emagrecimento e ganho de massa?
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-orange transition group-open:rotate-180"></i>
+          </summary>
+          <p class="text-brand-gray mt-4 font-light leading-relaxed">Sim. A estratégia é definida de acordo com o seu objetivo: emagrecimento, hipertrofia, definição ou performance.</p>
+        </details>
+
+        <details class="card-premium rounded-3xl p-7 group reveal">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-semibold text-brand-greenDark">
+            Como faço para agendar?
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-orange transition group-open:rotate-180"></i>
+          </summary>
+          <p class="text-brand-gray mt-4 font-light leading-relaxed">Clique em qualquer botão da página e envie uma mensagem pelo WhatsApp para receber as informações de horários e atendimento.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="relative py-28 lg:py-36 bg-brand-greenDeep text-white overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,130,0,.25),transparent_42%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(70,111,74,.42),transparent_46%)]"></div>
+    <div class="hero-grid opacity-30"></div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+      <span class="text-brand-orange uppercase tracking-[0.25em] text-sm font-extrabold">Consultoria personalizada</span>
+      <h2 class="font-serif text-4xl sm:text-5xl lg:text-7xl font-light mt-7 section-title">Quer parar de tentar sozinho?</h2>
+      <p class="text-white/65 text-lg lg:text-xl mt-8 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
+        Dê o primeiro passo para uma estratégia nutricional pensada para o seu corpo, sua rotina e seu objetivo.
+      </p>
+      <a
+        href="https://api.whatsapp.com/send/?phone=559191919567&text=Ol%C3%A1%2C%20quero%20agendar%20minha%20consulta%20com%20o%20Nutrirod&type=phone_number&app_absent=0&wame_ctl=1&source_surface=20"
+        target="_blank"
+        class="btn-premium inline-flex items-center gap-3 bg-brand-orange text-white px-12 py-5 rounded-full font-extrabold text-sm tracking-widest uppercase hover:bg-brand-orangeHover shadow-orangeGlow"
+      >
+        <i data-lucide="message-circle" class="w-5 h-5"></i>
+        Agendar minha consulta
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 bg-brand-light border-t border-brand-graySoft text-center text-brand-gray text-xs tracking-wider uppercase">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-5">
+      <p>© 2026 Nutrirod — Todos os direitos reservados.</p>
+      <p>Feito por Agência Doryan</p>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('flex');
+      });
+    }
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll() {
+      reveals.forEach((element) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight - 80) {
+          element.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
+</html>
